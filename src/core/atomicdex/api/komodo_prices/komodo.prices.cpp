@@ -10,7 +10,7 @@
 
 namespace
 {
-    constexpr const char*                 g_komodo_prices_endpoint = "https://myprice.cipig.net:1717";
+    constexpr const char*                 g_komodo_prices_endpoint = "https://prices.cipig.net:1717";
     constexpr const char*                 g_komodo_prices_endpoint_fallback = "https://prices.komodo.live:1313";
 
     web::http::client::http_client_config g_komodo_prices_cfg{[]()
