@@ -172,21 +172,25 @@ MultipageModal
         reset()
     }
 
-    onSend_rpc_resultChanged: {
-        if (is_send_busy === false) {
+    onSend_rpc_resultChanged:
+    {
+        if (is_send_busy === false)
+        {
             return
         }
 
         // Local var, faster
         const result = General.clone(send_rpc_result)
 
-        if(result.error_code) {
+        if (result.error_code)
+        {
             root.close()
-            console.log("Send Error:", result.error_code, " Message:", result.error_message)
             toast.show(qsTr("Failed to send"), General.time_toast_important_error, result.error_message)
         }
-        else {
-            if(!result || !result.withdraw_answer) {
+        else
+        {
+            if (!result || !result.withdraw_answer)
+            {
                 reset()
                 return
             }
@@ -201,15 +205,6 @@ MultipageModal
         }
 
         send_result = result
-    }
-
-    onAuth_succeededChanged: {
-        if (!auth_succeeded) {
-            console.log("Double verification failed, cannot confirm sending.")
-        }
-        else {
-            console.log("Double verification succeeded, validate sending.");
-        }
     }
 
     onBroadcast_resultChanged: {
@@ -267,14 +262,13 @@ MultipageModal
     {
         id: _preparePage
 
+        property bool cryptoSendMode: true
+
         titleText: qsTr("Prepare to send ") + current_ticker_infos.name
         titleAlignment: Qt.AlignHCenter
 
-        property bool cryptoSendMode: true
-
-        DexRectangle
+        DefaultRectangle
         {
-
             enabled: !root.segwit && !root.is_send_busy
 
             Layout.preferredWidth: 420
@@ -284,16 +278,15 @@ MultipageModal
             color: input_address.background.color
             radius: input_address.background.radius
 
-            DexTextField
+            DefaultTextField
             {
                 id: input_address
 
                 width: 390
                 height: 44
-
                 placeholderText: qsTr("Address of the recipient")
-                onTextChanged: api_wallet_page.validate_address(text)
                 forceFocus: true
+                onTextChanged: api_wallet_page.validate_address(text)
             }
 
             Rectangle
@@ -307,7 +300,7 @@ MultipageModal
 
                 color: addrbookIconMouseArea.containsMouse ? Dex.CurrentTheme.buttonColorHovered : "transparent"
 
-                DexMouseArea
+                DefaultMouseArea
                 {
                     id: addrbookIconMouseArea
                     anchors.fill: parent
@@ -316,7 +309,7 @@ MultipageModal
                 }
             }
 
-            DexImage
+            DefaultImage
             {
                 id: addrbookIcon
                 anchors.right: parent.right
@@ -342,7 +335,7 @@ MultipageModal
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
 
-            DexLabel
+            DefaultText
             {
                 id: reason
 
@@ -354,7 +347,7 @@ MultipageModal
                 text_value: qsTr("The address has to be mixed case.")
             }
 
-            DexButton
+            DefaultButton
             {
                 enabled: !root.is_send_busy
                 visible: needFix
@@ -393,7 +386,7 @@ MultipageModal
                 }
             }
 
-            DexLabel
+            DefaultText
             {
                 anchors.right: maxBut.left
                 anchors.rightMargin: 10
@@ -414,13 +407,13 @@ MultipageModal
                 radius: 7
                 color: maxButMouseArea.containsMouse ? Dex.CurrentTheme.buttonColorHovered : Dex.CurrentTheme.buttonColorEnabled
 
-                DexLabel
+                DefaultText
                 {
                     anchors.centerIn: parent
                     text: qsTr("MAX")
                 }
 
-                DexMouseArea
+                DefaultMouseArea
                 {
                     id: maxButMouseArea
                     anchors.fill: parent
@@ -448,7 +441,7 @@ MultipageModal
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: 380
 
-            DexLabel
+            DefaultText
             {
                 id: equivalentAmount
 
@@ -520,7 +513,7 @@ MultipageModal
                     anchors.verticalCenter: parent.verticalCenter
                     color: Dex.CurrentTheme.backgroundColor
 
-                    DexLabel
+                    DefaultText
                     {
                         id: fiat_symbol
                         visible: _preparePage.cryptoSendMode && API.app.settings_pg.current_currency_sign != "KMD"
@@ -529,7 +522,7 @@ MultipageModal
                         text: API.app.settings_pg.current_currency_sign
                     }
 
-                    DexImage
+                    DefaultImage
                     {
                         visible: !fiat_symbol.visible
                         anchors.centerIn: parent
@@ -539,7 +532,7 @@ MultipageModal
                     }
                 }
 
-                DexLabel
+                DefaultText
                 {
                     id: cryptoFiatSwitchText
                     anchors.left: cryptoFiatSwitchIcon.right
@@ -553,7 +546,7 @@ MultipageModal
                     }
                 }
 
-                DexMouseArea
+                DefaultMouseArea
                 {
                     id: cryptoFiatSwitchMouseArea
                     anchors.fill: parent
@@ -573,8 +566,9 @@ MultipageModal
         {
             Layout.preferredWidth: 380
             Layout.alignment: Qt.AlignHCenter
+
             // Custom fees switch
-            DexSwitch
+            DefaultSwitch
             {
                 id: custom_fees_switch
                 enabled: !root.is_send_busy
@@ -582,8 +576,9 @@ MultipageModal
                 label.text: qsTr("Enable Custom Fees")
                 onCheckedChanged: input_custom_fees.text = ""
             }
+
             // Custom fees warning
-            DexLabel
+            DefaultText
             {
                 visible: custom_fees_switch.checked
                 font.pixelSize: 14
@@ -650,7 +645,7 @@ MultipageModal
             }
 
             // Fee is higher than amount error
-            DexLabel
+            DefaultText
             {
                 id: fee_error
                 visible: feeIsHigherThanAmount()
@@ -664,7 +659,7 @@ MultipageModal
         }
 
         // Not enough funds error
-        DexLabel
+        DefaultText
         {
             Layout.topMargin: 16
             wrapMode: Text.Wrap
@@ -683,7 +678,7 @@ MultipageModal
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 20
 
-            DexButton
+            DefaultButton
             {
                 text: qsTr("Close")
 
@@ -786,7 +781,7 @@ MultipageModal
                   send_result.withdraw_answer.date
         }
 
-        DexBusyIndicator
+        DefaultBusyIndicator
         {
             visible: root.is_broadcast_busy
         }
@@ -794,11 +789,9 @@ MultipageModal
         // Buttons
         footer:
         [
-            Item
-            {
-                Layout.fillWidth: true
-            },
-            DexAppButton
+            Item { Layout.fillWidth: true },
+
+            DefaultButton
             {
                 text: qsTr("Back")
                 leftPadding: 40
@@ -807,10 +800,9 @@ MultipageModal
                 onClicked: root.currentIndex = 0
                 enabled: !root.is_broadcast_busy
             },
-            Item
-            {
-                Layout.fillWidth: true
-            },
+
+            Item { Layout.fillWidth: true },
+
             DexAppOutlineButton
             {
                 text: qsTr("Send")
@@ -820,10 +812,8 @@ MultipageModal
                 radius: 18
                 enabled: !root.is_broadcast_busy
             },
-            Item
-            {
-                Layout.fillWidth: true
-            }
+
+            Item { Layout.fillWidth: true }
         ]
     }
 
