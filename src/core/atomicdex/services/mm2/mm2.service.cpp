@@ -510,9 +510,35 @@ namespace atomic_dex
     }
 
     void mm2_service::enable_coins(const t_coins& coins)
-    {
+    {   
         t_coins other_coins;
-        t_coins erc_family_coins;
+        t_coins erc20_coins;
+        t_coins bep20_coins;
+        t_coins matic_coins;
+        t_coins arbitrum_coins;
+        t_coins avax_coins;
+        t_coins ftm_coins;
+        t_coins hrc_coins;
+        t_coins ubiq_coins;
+        t_coins krc_coins;
+        t_coins movr_coins;
+        t_coins moonbeam_coins;
+        t_coins heco_coins;
+        t_coins etc_coins;
+        t_coins rsk_coins;
+        t_coins smartbch_coins;
+        t_coins other_testnet_coins;
+        t_coins erc20_testnet_coins;
+        t_coins bep20_testnet_coins;
+        t_coins matic_testnet_coins;
+        t_coins arbitrum_testnet_coins;
+        t_coins avax_testnet_coins;
+        t_coins ftm_testnet_coins;
+        t_coins movr_testnet_coins;
+        t_coins moonbeam_testnet_coins;
+        t_coins heco_testnet_coins;
+        t_coins etc_testnet_coins;
+        t_coins rsk_testnet_coins
         t_coins slp_coins;
         t_coins slp_testnet_coins;
         t_coins zhtlc_coins;
@@ -540,7 +566,116 @@ namespace atomic_dex
             }
             else if (coin_config.is_erc_family)
             {
-                erc_family_coins.push_back(coin_config);
+                if (coin_config.is_testnet.value_or(false))
+                {
+                    if (coin_config.coin_type == CoinType::ERC20)
+                    {
+                        erc20_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::BEP20)
+                    {
+                        bep20_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Matic)
+                    {
+                        matic_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Arbitrum)
+                    {
+                        arbitrum_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::AVX20)
+                    {
+                        avax_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::FTM20)
+                    {
+                        ftm_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Moonriver)
+                    {
+                        movr_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Moonbeam)
+                    {
+                        moonbeam_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::HecoChain)
+                    {
+                        heco_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::EthereumClassic)
+                    {
+                        etc_testnet_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::RSK)
+                    {
+                        rsk_testnet_coins.push_back(coin_config);
+                    }
+                }
+                else
+                {
+                    if (coin_config.coin_type == CoinType::ERC20)
+                    {
+                        erc20_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::BEP20)
+                    {
+                        bep20_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Matic)
+                    {
+                        matic_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Arbitrum)
+                    {
+                        arbitrum_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::AVX20)
+                    {
+                        avax_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::FTM20)
+                    {
+                        ftm_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::HRC20)
+                    {
+                        hrc_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Ubiq)
+                    {
+                        ubiq_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::KRC20)
+                    {
+                        krc_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Moonriver)
+                    {
+                        movr_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::Moonbeam)
+                    {
+                        moonbeam_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::HecoChain)
+                    {
+                        heco_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::EthereumClassic)
+                    {
+                        etc_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::RSK)
+                    {
+                        rsk_coins.push_back(coin_config);
+                    }
+                    else if (coin_config.coin_type == CoinType::SmartBCH)
+                    {
+                        smartbch_coins.push_back(coin_config);
+                    }
+                }
             }
             else
             {
@@ -551,9 +686,109 @@ namespace atomic_dex
         {
             enable_utxo_qrc20_coins(other_coins);
         }
-        if (erc_family_coins.size() > 0)
+        if (erc20_coins.size() > 0)
         {
-            enable_erc_family_coins(erc_family_coins);
+            enable_erc20_coins(erc20_coins);
+        }
+        if (bep20_coins.size() > 0)
+        {
+            enable_erc20_coins(bep20_coins);
+        }
+        if (matic_coins.size() > 0)
+        {
+            enable_erc20_coins(matic_coins);
+        }
+        if (arbitrum_coins.size() > 0)
+        {
+            enable_erc20_coins(arbitrum_coins);
+        }
+        if (avax_coins.size() > 0)
+        {
+            enable_erc20_coins(avax_coins);
+        }
+        if (ftm_coins.size() > 0)
+        {
+            enable_erc20_coins(ftm_coins);
+        }
+        if (hrc_coins.size() > 0)
+        {
+            enable_erc20_coins(hrc_coins);
+        }
+        if (ubiq_coins.size() > 0)
+        {
+            enable_erc20_coins(ubiq_coins);
+        }
+        if (krc_coins.size() > 0)
+        {
+            enable_erc20_coins(krc_coins);
+        }
+        if (movr_coins.size() > 0)
+        {
+            enable_erc20_coins(movr_coins);
+        }
+        if (moonbeam_coins.size() > 0)
+        {
+            enable_erc20_coins(moonbeam_coins);
+        }
+        if (heco_coins.size() > 0)
+        {
+            enable_erc20_coins(heco_coins);
+        }
+        if (etc_coins.size() > 0)
+        {
+            enable_erc20_coins(etc_coins);
+        }
+        if (rsk_coins.size() > 0)
+        {
+            enable_erc20_coins(rsk_coins);
+        }
+        if (smartbch_coins.size() > 0)
+        {
+            enable_erc20_coins(smartbch_coins);
+        }
+        if (erc20_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(erc20_testnet_coins);
+        }
+        if (bep20_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(bep20_testnet_coins);
+        }
+        if (matic_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(matic_testnet_coins);
+        }
+        if (arbitrum_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(arbitrum_testnet_coins);
+        }
+        if (avax_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(avax_testnet_coins);
+        }
+        if (ftm_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(ftm_testnet_coins);
+        }
+        if (movr_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(movr_testnet_coins);
+        }
+        if (moonbeam_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(moonbeam_testnet_coins);
+        }
+        if (heco_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(heco_testnet_coins);
+        }
+        if (etc_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(etc_testnet_coins);
+        }
+        if (rsk_testnet_coins.size() > 0)
+        {
+            enable_erc20_coins(rsk_testnet_coins);
         }
         if (slp_coins.size() > 0)
         {
