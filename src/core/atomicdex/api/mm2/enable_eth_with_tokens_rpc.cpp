@@ -41,14 +41,12 @@ namespace atomic_dex::mm2
             }
             case CoinType::BEP20:
             {
-                SPDLOG_INFO("================ BNB");
                 j["swap_contract_address"]  = in.is_testnet.value_or(false) ? bnb_testnet_swap_contract_address : bnb_swap_contract_address;
                 j["fallback_swap_contract"] = in.is_testnet.value_or(false) ? bnb_testnet_fallback_swap_contract_address : bnb_fallback_swap_contract_address;
                 break;
             }
             case CoinType::AVX20:
             {
-                SPDLOG_INFO("================ AVX20");
                 j["swap_contract_address"]  = in.is_testnet.value_or(false) ? avax_erc_testnet_swap_contract_address : avax_erc_swap_contract_address;
                 j["fallback_swap_contract"] = in.is_testnet.value_or(false) ? avax_erc_testnet_fallback_swap_contract_address : avax_erc_fallback_swap_contract_address;
                 break;

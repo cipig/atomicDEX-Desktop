@@ -139,6 +139,7 @@ namespace atomic_dex
                 auto&& [prev_balance, new_balance, is_change_b] = update_value(BalanceRole, balance, idx, *this);
                 const QString display                           = QString::fromStdString(coin.ticker) + " (" + balance + ")";
                 update_value(Display, display, idx, *this);
+                //? @syl - could this be triggering crash?
                 // Not a good way to trigger notification, use websocket instead in the future. New was of enabling coins is not compatible.
                 if (is_change_b)
                 {
