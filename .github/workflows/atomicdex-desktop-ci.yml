@@ -11,8 +11,8 @@ on:
 
 env:
   DEX_API: "mm2"
-  DEX_RPCPORT: 7783
-  DEX_RPC: "http://127.0.0.1:7783"
+  DEX_RPCPORT: 7762
+  DEX_RPC: "http://127.0.0.1:7762"
   DEX_PROJECT_NAME: "atomicdex-desktop"
   DEX_DISPLAY_NAME: "AtomicDex Desktop"
   DEX_COMPANY: "KomodoPlatform"
@@ -256,6 +256,7 @@ jobs:
         shell: powershell
         run: |
           $Env:QT_VERSION = "${{ matrix.qt }}"
+          $Env:CMAKE_BUILD_TYPE = "${{ matrix.type }}"
           .\ci_tools_atomic_dex\ci_scripts\windows_script.ps1
 
       - name: Upload env variable for artifacts (Linux)
@@ -328,7 +329,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.artifact_name_zip }}
-          path: ./bundled/windows/bin.zip
+          path: ./bundled/windows/${{ env.DEX_PROJECT_NAME }}.zip
           retention-days: 7
 
       - name: Upload artifacts (Windows installer)
