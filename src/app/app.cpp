@@ -504,7 +504,7 @@ namespace atomic_dex
         //system_manager_.create_system<coingecko_provider>(system_manager_);
         system_manager_.create_system<komodo_prices_provider>();
         system_manager_.create_system<update_checker_service>();
-        system_manager_.create_system<coingecko_wallet_charts_service>(system_manager_);
+        //system_manager_.create_system<coingecko_wallet_charts_service>(system_manager_);
         system_manager_.create_system<exporter_service>(system_manager_);
         system_manager_.create_system<trading_page>(
             system_manager_, m_event_actions.at(events_action::about_to_exit_app), portfolio_system.get_portfolio(), this);
