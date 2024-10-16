@@ -63,7 +63,7 @@ if (APPLE)
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v2.1.0-beta/mm2-35e923949-Darwin-Release.zip)
 elseif (UNIX AND NOT APPLE)
     FetchContent_Declare(kdf
-            URL https://sdk.devbuilds.komodo.earth/fix-recover-taker/mm2_544b899-linux-x86-64.zip)
+            URL https://sdk.devbuilds.komodo.earth/1520-prioritize-nodes/mm2_596cba0-linux-x86-64.zip)
 else ()
     FetchContent_Declare(kdf
             URL https://github.com/KomodoPlatform/komodo-defi-framework/releases/download/v2.1.0-beta/mm2-35e923949-Win64.zip)
